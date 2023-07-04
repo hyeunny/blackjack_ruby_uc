@@ -36,7 +36,7 @@ b.play_game()
 or launch directly with
 
 ```
-rails rake play_blackjack
+rake play_blackjack
 ```
 
 # The game is made to run in the CLI
