@@ -2,7 +2,7 @@ require "test_helper"
 require 'minitest/spec'
 
 class PlayerTest < ActiveSupport::TestCase
-  describe 'initializing a player' do
+  describe '#new', 'initializing a player' do
     it 'raises an argument error with invalid player_type arg' do
       assert_raises(ArgumentError) do
         Player.new('baz', Deck.new)
@@ -15,28 +15,35 @@ class PlayerTest < ActiveSupport::TestCase
       end
     end
 
-    describe 'drawing cards' do
-      describe 'dealing/drawing' do
-        it 'updates the deck and player move and score states' do
-          deck = Deck.new
-          player = Player.new(Player::PLAYER, deck)
+    describe '#deal', 'dealing cards' do
+      it 'updates the deck and player move and score states' do
+        deck = Deck.new
+        player = Player.new(Player::PLAYER, deck)
 
-          # deal draws 2
-          player.deal()
-          assert deck.cards.length == 50
-          assert player.moves == 1
-          
-          # draw draws 1
-          player.draw()
-          assert deck.cards.length == 49
-          assert player.moves == 2
+        # deal draws 2
+        player.deal()
+        assert deck.cards.length == 50
+        assert player.moves == 1
 
-          assert player.score > 0
-        end
+        assert player.score > 0
       end
     end
 
-    describe 'calculating player score' do
+    describe '#draw', 'drawing cards' do
+      it 'updates the deck and player move and score states' do
+        deck = Deck.new
+        player = Player.new(Player::PLAYER, deck)
+        
+        # draw draws 1
+        player.draw()
+        assert deck.cards.length == 51
+        assert player.moves == 1
+
+        assert player.score > 0
+      end
+    end
+
+    describe '#check_score', 'calculating player score' do
       it 'calculates the score correctly' do
         deck = Deck.new
         player = Player.new(Player::PLAYER, deck)

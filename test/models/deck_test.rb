@@ -2,7 +2,7 @@ require "test_helper"
 require 'minitest/spec'
 
 class DeckTest < ActiveSupport::TestCase
-  describe 'initializing a deck' do
+  describe '#new', 'initializing a deck' do
     it 'contains the correct number of cards' do
       deck = Deck.new
       assert deck.cards.length == 52
@@ -23,7 +23,7 @@ class DeckTest < ActiveSupport::TestCase
     end
   end
 
-  describe 'drawing cards from a deck' do
+  describe '#draw', 'drawing cards from a deck' do
     it 'draws the expected amount of cards from the deck' do
       deck = Deck.new
       deck.draw(2)
@@ -31,7 +31,7 @@ class DeckTest < ActiveSupport::TestCase
     end
   end
 
-  describe 'shuffling a deck' do
+  describe '#shuffle_deck!', 'shuffling a deck' do
     it 'correctly shuffles the contents of the deck' do
       deck = Deck.new
       og_deck_serialized = deck.cards.map {|card| card.value+card.suit}.join(',')
